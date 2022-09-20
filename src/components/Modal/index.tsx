@@ -9,7 +9,7 @@ const ModalComponent = ({
                             setIsModalOpen
                         }: { handleAddContact: ({phone, email, name}: IUser) => void, isModalOpen: boolean, setIsModalOpen: () => void }) => {
     return (
-        <Modal title="Add new contact" open={isModalOpen} onCancel={setIsModalOpen} footer={[]}>
+        <Modal title="Add new contact" open={isModalOpen} onCancel={setIsModalOpen} footer={null}>
             <Form
                 name="basic"
                 autoComplete="off"

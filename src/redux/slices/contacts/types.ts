@@ -8,7 +8,6 @@ export type ContactItem = {
 export interface ContactsSliceState {
     items: ContactItem[],
     waiting: boolean,
-    page: number,
     query: string
 }
 

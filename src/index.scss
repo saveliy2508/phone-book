@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html{
+  position: relative;
+  min-height: 100%;
+}
+
 input, button, textarea, select {
   margin: 0;
   font: inherit;

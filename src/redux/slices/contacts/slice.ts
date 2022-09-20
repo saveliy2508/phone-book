@@ -1,11 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {fetchMoreContacts} from './asyncActions'
+import {addNewContact, deleteContact, fetchContacts} from './asyncActions'
 import {ContactItem, ContactsSliceState} from './types'
 
 const initialState: ContactsSliceState = {
     items: [],
     waiting: false,
-    page: 1,
     query: ''
 }
 
@@ -14,9 +13,7 @@ export const slice = createSlice({
     initialState,
     reducers: {
         setQuery(state, action: PayloadAction<string>) {
-            state.items = []
             state.query = action.payload
-            state.page = 1
         },
         setContacts(state, action: PayloadAction<ContactItem[]>) {
             state.items = action.payload
@@ -24,16 +21,25 @@ export const slice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchMoreContacts.pending, (state) => {
+        builder.addCase(fetchContacts.pending, (state) => {
             state.waiting = true
         })
-        builder.addCase(fetchMoreContacts.fulfilled, (state, action) => {
-            state.items = [...state.items, ...action.payload]
+        builder.addCase(fetchContacts.fulfilled, (state, action) => {
+            state.items = action.payload
             state.waiting = false
-            state.page += 1
         })
-        builder.addCase(fetchMoreContacts.rejected, (state) => {
+        builder.addCase(fetchContacts.rejected, (state) => {
             state.waiting = true
+        })
+
+        builder.addCase(addNewContact.fulfilled, (state, action) => {
+            state.items = [...state.items, action.payload]
+            state.waiting = false
+        })
+
+        builder.addCase(deleteContact.fulfilled, (state, action) => {
+            state.items = state.items.filter(item => item.id !== action.payload)
+            state.waiting = false
         })
     }
 })
