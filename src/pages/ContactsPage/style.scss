@@ -1,0 +1,19 @@
+.contacts_title {
+  padding-left: 20px;
+}
+
+.contacts_filter{
+  margin-bottom: 10px;
+}
+
+.contacts_scrollableBlock{
+  height: 400px;
+  overflow: auto;
+  padding: 0 16px 20px 16px;
+  border: 1px solid rgba(140, 140, 140, 0.35);
+}
+
+.contacts_controls {
+  display: flex;
+  justify-content: space-between;
+}
