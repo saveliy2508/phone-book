@@ -8,9 +8,10 @@ import {ContactItem, IUser} from "../../redux/slices/contacts/types";
 type ContactFormProps = {
     handleConfirm: ({id, phone, email, name}: ContactItem) => void,
     initialValue: IUser,
+    submitButtonText: string
 }
 
-const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue}) => {
+const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue, submitButtonText}) => {
     const formRef = React.useRef<HTMLFormElement>(null)
 
     React.useEffect(() => {
@@ -64,7 +65,7 @@ const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue}) => {
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit" block>
-                    Add
+                    {submitButtonText}
                 </Button>
             </Form.Item>
         </Form>

@@ -5,8 +5,6 @@ import {CloseOutlined, EditOutlined, UserOutlined} from '@ant-design/icons';
 
 import './style.scss';
 
-import AddContactForm from "../../components/AddContactForm";
-import ChangeContactForm from "../../components/ChangeContactForm";
 import ModalComponent from '../../components/Modal';
 
 import {addNewContact, changeContact, deleteContact, fetchContacts} from "../../redux/slices/contacts/asyncActions";
@@ -15,6 +13,7 @@ import {AppDispatch, RootState} from "../../redux/store";
 
 import {Modal} from "./types";
 import {ContactItem, IUser} from "../../redux/slices/contacts/types";
+import ContactForm from "../../components/ContactModalForm";
 
 const ContactsPage = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -67,15 +66,12 @@ const ContactsPage = () => {
                     isModalOpen={isModalOpen}
                     closeModal={callbacks.handleCloseModal}
                     title={isModalOpen === 'addModal' ? 'Add new contact' : `Change contact ${initialValue.name}`}>
-                    {isModalOpen === 'addModal' ?
-                        <AddContactForm
-                            handleConfirm={callbacks.handleAddContact}
-                            initialValue={{name: '', phone: '', email: ''}}/> :
-                        isModalOpen === 'changeModal' ?
-                            <ChangeContactForm
-                                handleConfirm={callbacks.handleChangeContact}
-                                initialValue={initialValue}/>
-                            : null}
+                        <ContactForm
+                            handleConfirm={
+                                isModalOpen === 'addModal' ? callbacks.handleAddContact: callbacks.handleChangeContact}
+                            initialValue={isModalOpen === 'addModal' ? {name: '', phone: '', email: ''}: initialValue}
+                            submitButtonText={isModalOpen === 'addModal' ? 'Add': 'Change'}
+                        />
                 </ModalComponent>
                 <div className='contacts_controls'>
                     <h2 className='contacts_title'>Contacts</h2>
