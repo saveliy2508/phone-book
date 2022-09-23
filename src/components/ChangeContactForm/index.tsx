@@ -1,4 +1,4 @@
-import React, {createRef, FC, RefObject} from 'react';
+import React, {FC, RefObject} from 'react';
 import './style.scss'
 import {Button, Form, Input} from "antd";
 import {ContactItem} from "../../redux/slices/contacts/types";
@@ -45,7 +45,7 @@ const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialVa
                 <Input/>
             </Form.Item>
             <Form.Item>
-                <Button type="primary" htmlType="submit" block onClick={()=>form.setFieldsValue({...initialValue})}>
+                <Button type="primary" htmlType="submit" block>
                     Change
                 </Button>
             </Form.Item>

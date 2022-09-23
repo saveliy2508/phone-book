@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import './style.scss'
 import {Button, Form, Input} from "antd";
-import {ContactItem} from "../../redux/slices/contacts/types";
+import {ContactItem, IUser} from "../../redux/slices/contacts/types";
 
 type AddContactFormProps = {
     handleConfirm: ({id, phone, email, name}: ContactItem) => void,
-    initialValue: { name: string, email: string, phone: string },
+    initialValue: IUser,
 }
 
 const AddContactForm: FC<AddContactFormProps> = ({handleConfirm, initialValue}) => {

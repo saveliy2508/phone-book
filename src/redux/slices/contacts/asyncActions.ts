@@ -6,7 +6,7 @@ export const fetchContacts = createAsyncThunk(
     'contacts/fetchContacts',
     async () => {
         const { data } = await axios.get(
-            `http://localhost:3001/users`
+            `http://localhost:3001/contacts`
         )
         return data as ContactItem[]
     }
@@ -15,7 +15,7 @@ export const fetchContacts = createAsyncThunk(
 export const addNewContact = createAsyncThunk(
     'contacts/addNewContact',
     async ({phone, email, name}: IUser) => {
-        const { data } = await axios.post(`http://localhost:3001/users`, {name, phone, email})
+        const { data } = await axios.post(`http://localhost:3001/contacts`, {name, phone, email})
         return data as ContactItem
     }
 )
@@ -23,7 +23,7 @@ export const addNewContact = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
     'contacts/deleteContact',
     async (id: number) => {
-        const { data } = await axios.delete(`http://localhost:3001/users/${id}`)
+        await axios.delete(`http://localhost:3001/contacts/${id}`)
         return id
     }
 )
@@ -32,7 +32,7 @@ export const deleteContact = createAsyncThunk(
 export const changeContact = createAsyncThunk(
     'contacts/changeContact',
     async ({id, name, phone, email}: ContactItem) => {
-        const { data } = await axios.patch(`http://localhost:3001/users/${id}`, {name, phone, email})
-        return id
+        const { data } = await axios.patch(`http://localhost:3001/contacts/${id}`, {name, phone, email})
+        return data
     }
 )

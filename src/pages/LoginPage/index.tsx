@@ -1,26 +1,32 @@
 import React from 'react';
 import './style.scss'
 import {Button, Form, Input} from "antd";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/store";
+import {loginUser} from "../../redux/slices/authentication/asyncActions";
+import {AccountData} from "../../redux/slices/authentication/types";
 
 const LoginPage = () => {
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const dispatch = useDispatch<AppDispatch>()
+
+    const HandleLogin = (values: AccountData) => {
+        dispatch(loginUser(values))
     };
 
     return (
         <div className='loginPage_container'>
             <Form
                 name="basic"
-                onFinish={onFinish}
+                onFinish={HandleLogin}
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Username"
-                    name="username"
+                    label="Email"
+                    name="email"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your email!',
                         },
                     ]}
                 >

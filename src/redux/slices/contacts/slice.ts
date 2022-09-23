@@ -29,7 +29,7 @@ export const slice = createSlice({
             state.waiting = false
         })
         builder.addCase(fetchContacts.rejected, (state) => {
-            state.waiting = true
+            state.waiting = false
         })
 
         builder.addCase(addNewContact.fulfilled, (state, action) => {
@@ -42,12 +42,24 @@ export const slice = createSlice({
             state.waiting = false
         })
 
-        // builder.addCase(changeContact.fulfilled, (state, action) => {
-        //     state.items = state.items.map(item => item.id !== action.payload.id ? item)
-        //     state.waiting = false
-        // })
+        builder.addCase(changeContact.fulfilled, (state, action) => {
+            state.items = state.items.map(item => {
+                if(item.id === action.payload.id) {
+                    return {
+                        id: item.id,
+                        name: action.payload.name,
+                        phone: action.payload.phone,
+                        email: action.payload.email
+                    }
+                } else{
+                    return item
+                }
+            })
+            state.waiting = false
+        })
     }
 })
+
 export const {setContacts, setQuery} = slice.actions
 
 export default slice.reducer

@@ -1,6 +1,13 @@
 {
   "users": [
     {
+      "email": "test@email.com",
+      "password": "$2a$10$mQ6Mu9h8Hzt3w4DThgvsjeEe494/J2WsItW..CIxoE7keXSCGFv.O",
+      "id": 1
+    }
+  ],
+  "contacts": [
+    {
       "id": 1,
       "name": "Leanne Graham",
       "email": "Sincere@april.biz",
@@ -62,9 +69,9 @@
     },
     {
       "id": 11,
-      "name": "Leanne Graham",
-      "email": "Sincere@april.biz",
-      "phone": "1-770-736-8031 x56442"
+      "name": "Leanne Grahammmm",
+      "email": "Sincere@april.bizaaaa",
+      "phone": "1-770-736-8031 x56442asd"
     },
     {
       "id": 12,
@@ -83,12 +90,6 @@
       "name": "Patricia Lebsack",
       "email": "Julianne.OConner@kory.org",
       "phone": "493-170-9623 x156"
-    },
-    {
-      "id": 15,
-      "name": "Chelsey Dietrich",
-      "email": "Lucio_Hettinger@annie.ca",
-      "phone": "(254)954-1289"
     },
     {
       "id": 16,
@@ -119,42 +120,6 @@
       "name": "Clementina DuBuque",
       "email": "Rey.Padberg@karina.biz",
       "phone": "024-648-3804"
-    },
-    {
-      "id": 21,
-      "name": "Leanne Graham",
-      "email": "Sincere@april.biz",
-      "phone": "1-770-736-8031 x56442"
-    },
-    {
-      "id": 23,
-      "name": "Clementine Bauch",
-      "email": "Nathan@yesenia.net",
-      "phone": "1-463-123-4447"
-    },
-    {
-      "id": 77,
-      "name": "Saveliy",
-      "phone": "123123123",
-      "email": "svol@gmail.com"
-    },
-    {
-      "name": "qqq",
-      "phone": "qqq",
-      "email": "qq",
-      "id": 86
-    },
-    {
-      "name": "qwww",
-      "phone": "eqeq",
-      "email": "eeq",
-      "id": 88
-    },
-    {
-      "name": "Saveliy",
-      "phone": "89532643826",
-      "email": "svolskey2929@gmail.com",
-      "id": 90
     }
   ]
 }

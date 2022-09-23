@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import contactsSlice from './slices/contacts/slice'
+import authenticationSlice from './slices/authentication/slice'
 
 export const store = configureStore({
     reducer: {
-        contactsSlice
+        contactsSlice,
+        authenticationSlice,
     }
 })
 

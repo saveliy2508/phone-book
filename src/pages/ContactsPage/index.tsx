@@ -30,7 +30,7 @@ const ContactsPage = () => {
 
     const [isModalOpen, setIsModalOpen] = useState<'addModal' | 'changeModal' | ''>('');
 
-    const [initialValue, setInitialValue] = useState({id: 0, name: '', phone: '', email: ''});
+    const [initialValue, setInitialValue] = useState<ContactItem>({id: 0, name: '', phone: '', email: ''});
 
     const handleAddContact = ({phone, email, name}: IUser) => {
         dispatch(addNewContact({phone, email, name}))
@@ -45,12 +45,10 @@ const ContactsPage = () => {
         setIsModalOpen('changeModal')
     }
 
-    const handleChangeContact = ({name, phone, email}: IUser) => {
-        // dispatch(changeContact({id, name, phone, email}))
-        // console.log(initialValue.id, name, phone, email)
+    const handleChangeContact = ({name, phone, email}: ContactItem) => {
+        dispatch(changeContact({id: initialValue.id, name, phone, email}))
+        console.log(initialValue.id, name, phone, email)
     }
-
-    console.log(isModalOpen)
 
     return (
         <>
@@ -63,11 +61,11 @@ const ContactsPage = () => {
                         <AddContactForm
                             handleConfirm={handleAddContact}
                             initialValue={{name: '', phone: '', email: ''}}/> :
-                     isModalOpen === 'changeModal' ?
-                         <ChangeContactForm
-                            handleConfirm={handleChangeContact}
-                            initialValue={initialValue}/>
-                         : null}
+                        isModalOpen === 'changeModal' ?
+                            <ChangeContactForm
+                                handleConfirm={handleChangeContact}
+                                initialValue={initialValue}/>
+                            : null}
                 </ModalComponent>
                 <div className='contacts_controls'>
                     <h2 className='contacts_title'>Contacts</h2>
@@ -86,21 +84,24 @@ const ContactsPage = () => {
                 className="contacts_list"
             >
                 {!waiting ? <List
-                    dataSource={options.items}
-                    renderItem={(item) => (
-                        <List.Item key={item.id}>
-                            <div className='contacts_itemList'>
-                                <div>{item.name}</div>
-                                <div>{item.phone}</div>
-                                <div>{item.email}</div>
-                                <div className='contacts_controlItem'>
-                                    <CloseOutlined onClick={() => handleDeleteContact(item.id)}/>
-                                    <EditOutlined onClick={() => handleOpenChangeModal(item)}/>
+                        dataSource={options.items}
+                        renderItem={(item) => (
+                            <List.Item key={item.id}>
+                                <div className='contacts_itemList'>
+                                    <div>{item.name}</div>
+                                    <div>{item.phone}</div>
+                                    <div>{item.email}</div>
+                                    <div className='contacts_controlItem'>
+                                        <CloseOutlined onClick={() => handleDeleteContact(item.id)}/>
+                                        <EditOutlined onClick={() => handleOpenChangeModal(item)}/>
+                                    </div>
                                 </div>
-                            </div>
-                        </List.Item>
-                    )}
-                /> : <Spin/>}
+                            </List.Item>
+                        )}
+                    /> :
+                    <div className="contacts_spinWrapper">
+                        <Spin size='large'/>
+                    </div>}
             </div>
         </>
     );
