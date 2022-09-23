@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {addNewContact, deleteContact, fetchContacts} from './asyncActions'
+import {addNewContact, changeContact, deleteContact, fetchContacts} from './asyncActions'
 import {ContactItem, ContactsSliceState} from './types'
 
 const initialState: ContactsSliceState = {
@@ -41,6 +41,11 @@ export const slice = createSlice({
             state.items = state.items.filter(item => item.id !== action.payload)
             state.waiting = false
         })
+
+        // builder.addCase(changeContact.fulfilled, (state, action) => {
+        //     state.items = state.items.map(item => item.id !== action.payload.id ? item)
+        //     state.waiting = false
+        // })
     }
 })
 export const {setContacts, setQuery} = slice.actions
