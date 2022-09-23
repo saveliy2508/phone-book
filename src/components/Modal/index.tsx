@@ -1,6 +1,7 @@
 import React, {FC, ReactNode} from 'react';
-import './style.scss'
 import {Modal} from "antd";
+
+import './style.scss'
 
 type ModalComponent = {
     children: ReactNode,

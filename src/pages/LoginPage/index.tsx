@@ -1,23 +1,28 @@
-import React from 'react';
-import './style.scss'
+import React, {useCallback} from 'react';
 import {Button, Form, Input} from "antd";
 import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../redux/store";
+
+import './style.scss'
+
 import {loginUser} from "../../redux/slices/authentication/asyncActions";
+
 import {AccountData} from "../../redux/slices/authentication/types";
+import {AppDispatch} from "../../redux/store";
 
 const LoginPage = () => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const HandleLogin = (values: AccountData) => {
-        dispatch(loginUser(values))
-    };
+    const callbacks = {
+        handleLogin: useCallback((values: AccountData) => {
+            dispatch(loginUser(values))
+        }, [])
+    }
 
     return (
         <div className='loginPage_container'>
             <Form
-                name="basic"
-                onFinish={HandleLogin}
+                name="loginForm"
+                onFinish={callbacks.handleLogin}
                 autoComplete="off"
             >
                 <Form.Item

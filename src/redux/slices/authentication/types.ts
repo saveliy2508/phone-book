@@ -7,7 +7,7 @@ export interface UserSliceState {
     errorMessage: string
 }
 
-export type UsersData = {
+export type UserData = {
     user: {
         id: number,
         email: string

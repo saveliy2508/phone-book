@@ -1,4 +1,4 @@
-export type ContactItem = {
+export interface ContactItem {
     id: number,
     name: string,
     email: string,

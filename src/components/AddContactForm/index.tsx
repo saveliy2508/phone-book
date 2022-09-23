@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, RefObject} from 'react';
 import './style.scss'
 import {Button, Form, Input} from "antd";
 import {ContactItem, IUser} from "../../redux/slices/contacts/types";
@@ -9,12 +9,18 @@ type AddContactFormProps = {
 }
 
 const AddContactForm: FC<AddContactFormProps> = ({handleConfirm, initialValue}) => {
+    const formRef = React.useRef<HTMLFormElement>(null)
+
+    React.useEffect(() => {
+        formRef.current?.setFieldsValue(initialValue);
+    }, [initialValue]);
+
     return (
         <Form
             name="addContact"
             autoComplete="off"
             onFinish={(e) => handleConfirm({...e})}
-            initialValues={initialValue}
+            ref={formRef as RefObject<any>}
         >
             <Form.Item
                 label="Name"

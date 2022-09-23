@@ -2,6 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import {ContactItem, IUser} from './types'
 
+/**
+ * Получение всех контактов
+ */
 export const fetchContacts = createAsyncThunk(
     'contacts/fetchContacts',
     async () => {
@@ -12,6 +15,9 @@ export const fetchContacts = createAsyncThunk(
     }
 )
 
+/**
+ * Добавление контакта
+ */
 export const addNewContact = createAsyncThunk(
     'contacts/addNewContact',
     async ({phone, email, name}: IUser) => {
@@ -20,6 +26,9 @@ export const addNewContact = createAsyncThunk(
     }
 )
 
+/**
+ * Удаление контакта
+ */
 export const deleteContact = createAsyncThunk(
     'contacts/deleteContact',
     async (id: number) => {
@@ -28,7 +37,9 @@ export const deleteContact = createAsyncThunk(
     }
 )
 
-
+/**
+ * Изменение контакта
+ */
 export const changeContact = createAsyncThunk(
     'contacts/changeContact',
     async ({id, name, phone, email}: ContactItem) => {

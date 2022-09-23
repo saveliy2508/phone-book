@@ -1,14 +1,16 @@
 import React, {FC, RefObject} from 'react';
-import './style.scss'
 import {Button, Form, Input} from "antd";
-import {ContactItem} from "../../redux/slices/contacts/types";
 
-type ChangeContactFormProps = {
+import './style.scss';
+
+import {ContactItem, IUser} from "../../redux/slices/contacts/types";
+
+type ContactFormProps = {
     handleConfirm: ({id, phone, email, name}: ContactItem) => void,
-    initialValue: { name: string, email: string, phone: string },
+    initialValue: IUser,
 }
 
-const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialValue}) => {
+const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue}) => {
     const formRef = React.useRef<HTMLFormElement>(null)
 
     React.useEffect(() => {
@@ -17,7 +19,7 @@ const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialVa
 
     return (
         <Form
-            name="changeContact"
+            name="addContact"
             autoComplete="off"
             onFinish={(e) => handleConfirm({...e})}
             ref={formRef as RefObject<any>}
@@ -25,6 +27,12 @@ const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialVa
             <Form.Item
                 label="Name"
                 name="name"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input name!',
+                    },
+                ]}
             >
                 <Input/>
             </Form.Item>
@@ -32,6 +40,12 @@ const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialVa
             <Form.Item
                 label="Phone"
                 name="phone"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input phone!',
+                    },
+                ]}
             >
                 <Input/>
             </Form.Item>
@@ -39,16 +53,22 @@ const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialVa
             <Form.Item
                 label="Email"
                 name="email"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input email!',
+                    },
+                ]}
             >
                 <Input/>
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit" block>
-                    Change
+                    Add
                 </Button>
             </Form.Item>
         </Form>
     );
 };
 
-export default ChangeContactForm;
+export default ContactForm;
