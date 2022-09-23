@@ -11,9 +11,10 @@ type AddContactFormProps = {
 const AddContactForm: FC<AddContactFormProps> = ({handleConfirm, initialValue}) => {
     return (
         <Form
-            name="basic"
+            name="addContact"
             autoComplete="off"
             onFinish={(e) => handleConfirm({...e})}
+            initialValues={initialValue}
         >
             <Form.Item
                 label="Name"
@@ -25,7 +26,7 @@ const AddContactForm: FC<AddContactFormProps> = ({handleConfirm, initialValue}) 
                     },
                 ]}
             >
-                <Input defaultValue={initialValue.name}/>
+                <Input/>
             </Form.Item>
 
             <Form.Item
@@ -38,7 +39,7 @@ const AddContactForm: FC<AddContactFormProps> = ({handleConfirm, initialValue}) 
                     },
                 ]}
             >
-                <Input defaultValue={initialValue.phone}/>
+                <Input/>
             </Form.Item>
 
             <Form.Item
@@ -51,7 +52,7 @@ const AddContactForm: FC<AddContactFormProps> = ({handleConfirm, initialValue}) 
                     },
                 ]}
             >
-                <Input defaultValue={initialValue.email}/>
+                <Input/>
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit" block>

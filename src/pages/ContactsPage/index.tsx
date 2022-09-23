@@ -45,9 +45,12 @@ const ContactsPage = () => {
         setIsModalOpen('changeModal')
     }
 
-    const handleChangeContact = ({id, name, phone, email}: ContactItem) => {
-        dispatch(changeContact({id, name, phone, email}))
+    const handleChangeContact = ({name, phone, email}: IUser) => {
+        // dispatch(changeContact({id, name, phone, email}))
+        // console.log(initialValue.id, name, phone, email)
     }
+
+    console.log(isModalOpen)
 
     return (
         <>
@@ -60,9 +63,11 @@ const ContactsPage = () => {
                         <AddContactForm
                             handleConfirm={handleAddContact}
                             initialValue={{name: '', phone: '', email: ''}}/> :
-                        <ChangeContactForm
+                     isModalOpen === 'changeModal' ?
+                         <ChangeContactForm
                             handleConfirm={handleChangeContact}
-                            initialValue={initialValue}/>}
+                            initialValue={initialValue}/>
+                         : null}
                 </ModalComponent>
                 <div className='contacts_controls'>
                     <h2 className='contacts_title'>Contacts</h2>

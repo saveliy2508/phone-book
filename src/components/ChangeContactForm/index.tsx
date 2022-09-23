@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {createRef, FC, RefObject} from 'react';
 import './style.scss'
 import {Button, Form, Input} from "antd";
 import {ContactItem} from "../../redux/slices/contacts/types";
@@ -9,35 +9,44 @@ type ChangeContactFormProps = {
 }
 
 const ChangeContactForm: FC<ChangeContactFormProps> = ({handleConfirm, initialValue}) => {
+    const [form] = Form.useForm()
+
+    const formRef = React.useRef<HTMLFormElement>(null)
+
+    React.useEffect(() => {
+        formRef.current?.setFieldsValue(initialValue);
+    }, [initialValue]);
+
     return (
         <Form
-            name="basic"
+            name="changeContact"
             autoComplete="off"
             onFinish={(e) => handleConfirm({...e})}
+            ref={formRef as RefObject<any>}
         >
             <Form.Item
                 label="Name"
                 name="name"
             >
-                <Input defaultValue={initialValue.name}/>
+                <Input value={'222'}/>
             </Form.Item>
 
             <Form.Item
                 label="Phone"
                 name="phone"
             >
-                <Input defaultValue={initialValue.phone}/>
+                <Input/>
             </Form.Item>
 
             <Form.Item
                 label="Email"
                 name="email"
             >
-                <Input defaultValue={initialValue.email}/>
+                <Input/>
             </Form.Item>
             <Form.Item>
-                <Button type="primary" htmlType="submit" block>
-                    Add
+                <Button type="primary" htmlType="submit" block onClick={()=>form.setFieldsValue({...initialValue})}>
+                    Change
                 </Button>
             </Form.Item>
         </Form>
