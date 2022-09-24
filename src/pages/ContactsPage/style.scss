@@ -9,6 +9,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 50px;
       width: 100%;
+      overflow-x: hidden;
+      @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+        width: auto;
+        div{
+          margin: 3px 0;
+        }
+      }
 
       .contacts_controlItem {
         display: flex;

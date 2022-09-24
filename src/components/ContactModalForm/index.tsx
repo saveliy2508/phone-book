@@ -24,6 +24,9 @@ const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue, submitB
             autoComplete="off"
             onFinish={(e) => handleConfirm({...e})}
             ref={formRef as RefObject<any>}
+            labelCol={{
+                span: 3,
+            }}
         >
             <Form.Item
                 label="Name"
@@ -60,6 +63,7 @@ const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue, submitB
                         message: 'Please input email!',
                     },
                 ]}
+
             >
                 <Input/>
             </Form.Item>
@@ -72,4 +76,4 @@ const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue, submitB
     );
 };
 
-export default ContactForm;
+export default React.memo(ContactForm);

@@ -7,12 +7,20 @@ export interface UserSliceState {
     errorMessage: string
 }
 
-export type UserData = {
-    user: {
-        id: number,
-        email: string
+export type UserRejectedResponse = {
+    status: number,
+    data: string
+}
+
+export type UserFulfilledResponse = {
+    status: number,
+    data: {
+        user: {
+            id: number,
+            email: string
+        }
+        accessToken: string
     }
-    accessToken: string
 }
 
 export type AccountData = {

@@ -14,4 +14,4 @@ const Container: FC<ContainerProps> = ({children}) => {
     );
 };
 
-export default Container;
+export default React.memo(Container);

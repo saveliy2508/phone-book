@@ -21,4 +21,4 @@ const Header: FC<HeaderProps> = ({isAuth, handleEndSession}) => {
     );
 };
 
-export default Header;
+export default React.memo(Header);

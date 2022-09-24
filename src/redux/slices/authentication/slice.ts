@@ -29,7 +29,9 @@ export const slice = createSlice({
                 state.isAuth = true
             }
         },
-
+        clearError(state) {
+            state.errorMessage = ''
+        },
         /**
          * Завершение сессии
          */
@@ -44,25 +46,37 @@ export const slice = createSlice({
     extraReducers: (builder) => {
         /**
          * Редюссеры для loginUser
+         * (так странно описаны, т.к. не получалось иначе достать сообщение о текущей ошибке)
          */
         builder.addCase(loginUser.pending, (state) => {
             state.waiting = true
         })
         builder.addCase(loginUser.fulfilled, (state, action) => {
-            localStorage.setItem('userData', JSON.stringify(action.payload))
-            state.id = action.payload.user.id
-            state.email = action.payload.user.email
-            state.accessToken = action.payload.accessToken
-            state.isAuth = true
+                console.log(action.payload)
+                if (action.payload.status >= 400) {
+                    if (typeof action.payload.data === 'string') {
+                        state.errorMessage = action.payload.data
+                    }
+                } else if (action.payload.status >= 200) {
+                    localStorage.setItem('userData', JSON.stringify(action.payload.data))
+                    if (typeof action.payload.data === 'object') {
+                        state.id = action.payload.data.user.id
+                        state.email = action.payload.data.user.email
+                        state.accessToken = action.payload.data.accessToken
+                        state.isAuth = true
+                        state.waiting = false
+                        state.errorMessage = ''
+                    }
+                }
+            }
+        )
+        builder.addCase(loginUser.rejected, (state, action) => {
             state.waiting = false
-            state.errorMessage = ''
-        })
-        builder.addCase(loginUser.rejected, (state) => {
-            state.waiting = false
+            state.errorMessage = 'Some error'
         })
     }
 })
 
-export const {restoreSession, endSession} = slice.actions
+export const {restoreSession, endSession, clearError} = slice.actions
 
 export default slice.reducer

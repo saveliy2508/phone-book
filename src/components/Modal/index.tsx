@@ -24,4 +24,4 @@ const ModalComponent: FC<ModalComponent> = ({
     );
 };
 
-export default ModalComponent;
+export default React.memo(ModalComponent);

@@ -1,21 +1,29 @@
 import React, {useCallback} from 'react';
 import {Button, Form, Input} from "antd";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import './style.scss'
 
 import {loginUser} from "../../redux/slices/authentication/asyncActions";
 
 import {AccountData} from "../../redux/slices/authentication/types";
-import {AppDispatch} from "../../redux/store";
+import {AppDispatch, RootState} from "../../redux/store";
+import {clearError} from "../../redux/slices/authentication/slice";
 
 const LoginPage = () => {
     const dispatch = useDispatch<AppDispatch>()
 
+    const {errorMessage} = useSelector(({authenticationSlice}: RootState) => authenticationSlice)
+
     const callbacks = {
         handleLogin: useCallback((values: AccountData) => {
             dispatch(loginUser(values))
-        }, [])
+        }, []),
+        handleClearError: useCallback(() => {
+            if (errorMessage) {
+                dispatch(clearError())
+            }
+        }, [errorMessage])
     }
 
     return (
@@ -24,6 +32,10 @@ const LoginPage = () => {
                 name="loginForm"
                 onFinish={callbacks.handleLogin}
                 autoComplete="off"
+                onChange={callbacks.handleClearError}
+                labelCol={{
+                    span: 4,
+                }}
             >
                 <Form.Item
                     label="Email"
@@ -50,7 +62,7 @@ const LoginPage = () => {
                 >
                     <Input.Password/>
                 </Form.Item>
-
+                <div className={'loginPage_errorMessage'}>{errorMessage}</div>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" block>
                         Login
