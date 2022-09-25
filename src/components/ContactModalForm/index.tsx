@@ -36,6 +36,10 @@ const ContactForm: FC<ContactFormProps> = ({handleConfirm, initialValue, submitB
                         required: true,
                         message: 'Please input name!',
                     },
+                    {
+                        max: 30,
+                        message: 'Maximum 30 characters'
+                    }
                 ]}
             >
                 <Input/>

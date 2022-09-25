@@ -52,7 +52,6 @@ export const slice = createSlice({
             state.waiting = true
         })
         builder.addCase(loginUser.fulfilled, (state, action) => {
-                console.log(action.payload)
                 if (action.payload.status >= 400) {
                     if (typeof action.payload.data === 'string') {
                         state.errorMessage = action.payload.data
